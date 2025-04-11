@@ -103,20 +103,20 @@ runs:
         groups:${{ inputs.tester_groups }}
 
     # Deploy to Firebase App Distribution
-    - name: ☁️ Deploy Demo Application on Firebase
-      if: ${{ inputs.release_type == 'demo' }}
-      shell: bash
-      env:
-        KEYSTORE_PASSWORD: ${{ inputs.keystore_password }}
-        KEYSTORE_ALIAS: ${{ inputs.keystore_alias }}
-        KEYSTORE_ALIAS_PASSWORD: ${{ inputs.keystore_alias_password }}
-      run: |
-        bundle exec fastlane android deployDemoApkOnFirebase \
-        storeFile:release_keystore.keystore \
-        storePassword:${{ env.KEYSTORE_PASSWORD }} \
-        keyAlias:${{ env.KEYSTORE_ALIAS }} \
-        keyPassword:${{ env.KEYSTORE_ALIAS_PASSWORD }} \
-        groups:${{ inputs.tester_groups }}
+#    - name: ☁️ Deploy Demo Application on Firebase
+#      if: ${{ inputs.release_type == 'demo' }}
+#      shell: bash
+#      env:
+#        KEYSTORE_PASSWORD: ${{ inputs.keystore_password }}
+#        KEYSTORE_ALIAS: ${{ inputs.keystore_alias }}
+#        KEYSTORE_ALIAS_PASSWORD: ${{ inputs.keystore_alias_password }}
+#      run: |
+#        bundle exec fastlane android deployDemoApkOnFirebase \
+#        storeFile:release_keystore.keystore \
+#        storePassword:${{ env.KEYSTORE_PASSWORD }} \
+#        keyAlias:${{ env.KEYSTORE_ALIAS }} \
+#        keyPassword:${{ env.KEYSTORE_ALIAS_PASSWORD }} \
+#        groups:${{ inputs.tester_groups }}
      
     # Clean up secrets
     - name: Clean up secrets
