@@ -73,7 +73,18 @@ runs:
         
         # Inflate Firebase credentials
         touch secrets/firebaseAppDistributionServiceCredentialsFile.json
-        echo $FIREBASE_CREDS | base64 --decode > secrets/firebaseAppDistributionServiceCredentialsFile.json
+        echo "$FIREBASE_CREDS" | base64 --decode > secrets/firebaseAppDistributionServiceCredentialsFile.json
+
+    - name: Check Firebase credentials file
+      shell: bash
+      run: |
+        if [ ! -s secrets/firebaseAppDistributionServiceCredentialsFile.json ]; then
+          echo "❌ Firebase credentials file is missing or empty!"
+          cat secrets/firebaseAppDistributionServiceCredentialsFile.json || echo "File not found"
+          exit 1
+        else
+          echo "✅ Firebase credentials file looks good!"
+        fi  
 
     # Deploy to Firebase App Distribution
     - name: ☁️ Deploy Prod Application on Firebase
